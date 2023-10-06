@@ -15,6 +15,7 @@ public class CarController : MonoBehaviour
     private void Update()
     {
         playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (Input.GetKeyDown(KeyCode.R)) CheckpointManager.checkpointManager.RestartGame(gameObject);
     }
 
     private void FixedUpdate()

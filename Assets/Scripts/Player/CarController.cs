@@ -8,6 +8,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private WheelCollider backRIghtWheelCollider;
     [SerializeField] private float carSpeed;
     [SerializeField] private float carSteerAngle;
+    [SerializeField] private Transform playerSpawnPoint;
 
     private Vector2 playerInput;
     private float currentSteerAngle;
@@ -15,7 +16,7 @@ public class CarController : MonoBehaviour
     private void Update()
     {
         playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (Input.GetKeyDown(KeyCode.R)) CheckpointManager.checkpointManager.RestartGame(gameObject);
+        if (Input.GetKeyDown(KeyCode.R)) RestartGame();
     }
 
     private void FixedUpdate()
@@ -37,5 +38,16 @@ public class CarController : MonoBehaviour
         currentSteerAngle = carSteerAngle * playerInput.x;
         frontLeftWheelCollider.steerAngle = currentSteerAngle;
         frontRightWheelCollider.steerAngle = currentSteerAngle;
+    }
+
+    private void RestartGame()
+    {
+        CheckpointManager checkpointManager = CheckpointManager.checkpointManager;
+        gameObject.transform.position = playerSpawnPoint.transform.position;
+        gameObject.transform.rotation = playerSpawnPoint.transform.rotation;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        checkpointManager.ChangeCheckpointState(checkpointManager.GetCurrentCheckpoint(), false);
+        checkpointManager.SetCurrentCheckpoint(0);
+        checkpointManager.ChangeCheckpointState(checkpointManager.GetCurrentCheckpoint(), true);
     }
 }

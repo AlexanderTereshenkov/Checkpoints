@@ -5,16 +5,18 @@ public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager checkpointManager;
 
-    [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private bool isCircled;
+    [SerializeField] private GameStateUI gameStateUI;
 
     private List<GameObject> checkpoints = new List<GameObject>();
-
     private int currentCheckpoint = 0;
+    private bool isFirstLap = false;
+
     private void Awake()
     {
         checkpointManager = this;
     }
+
     private void Start()
     {
         foreach(Transform child in transform)
@@ -27,17 +29,44 @@ public class CheckpointManager : MonoBehaviour
 
     public void ChangeCheckpoint()
     {
-        checkpoints[currentCheckpoint].gameObject.SetActive(false);
-        currentCheckpoint = currentCheckpoint + 1 == checkpoints.Count - 1 ? 0 : currentCheckpoint + 1;
-        checkpoints[currentCheckpoint].gameObject.SetActive(true);
+        if (isCircled)
+        {
+            ChangeCheckpointState(currentCheckpoint, false);
+            currentCheckpoint = currentCheckpoint + 1 == checkpoints.Count - 1 ? 0 : currentCheckpoint + 1;
+            ChangeCheckpointState(currentCheckpoint, true);
+            if (isFirstLap && currentCheckpoint == 1) gameStateUI.ShowCnagedLap();
+            if (!isFirstLap) isFirstLap = true;
+        }
+        else
+        {
+            if(currentCheckpoint + 1 != checkpoints.Count)
+            {
+                ChangeCheckpointState(currentCheckpoint, false);
+                currentCheckpoint++;
+                ChangeCheckpointState(currentCheckpoint, true);
+            }
+            else
+            {
+                ChangeCheckpointState(currentCheckpoint, false);
+                gameStateUI.ShowFinalScreen();
+            }
+        }
     }
 
-    public void RestartGame(GameObject player)
+
+    public void ChangeCheckpointState(int pos, bool value)
     {
-        player.transform.position = playerSpawnPoint.position;
-        player.transform.rotation = playerSpawnPoint.rotation;
-        checkpoints[currentCheckpoint].gameObject.SetActive(false);
-        currentCheckpoint = 0;
-        checkpoints[currentCheckpoint].gameObject.SetActive(true);
+        checkpoints[pos].gameObject.SetActive(value);
     }
+
+    public int GetCurrentCheckpoint()
+    {
+        return currentCheckpoint;
+    }
+
+    public void SetCurrentCheckpoint(int value)
+    {
+        currentCheckpoint = value;
+    }
+
 }

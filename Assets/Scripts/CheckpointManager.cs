@@ -7,10 +7,13 @@ public class CheckpointManager : MonoBehaviour
 
     [SerializeField] private bool isCircled;
     [SerializeField] private GameStateUI gameStateUI;
+    [SerializeField] private DrawBezierCurve drawBezierCurve;
 
     private List<GameObject> checkpoints = new List<GameObject>();
     private int currentCheckpoint = 0;
     private bool isFirstLap = false;
+    private GameObject previousCheckpoint;
+    private GameObject nextCheckpoint;
 
     private void Awake()
     {
@@ -30,10 +33,14 @@ public class CheckpointManager : MonoBehaviour
     public void ChangeCheckpoint()
     {
         if (isCircled)
-        {
+        {   
             ChangeCheckpointState(currentCheckpoint, false);
             currentCheckpoint = currentCheckpoint + 1 == checkpoints.Count - 1 ? 0 : currentCheckpoint + 1;
             ChangeCheckpointState(currentCheckpoint, true);
+
+            drawBezierCurve.DeleteLine();
+            drawBezierCurve.DrawCurve(previousCheckpoint, nextCheckpoint);
+
             if (isFirstLap && currentCheckpoint == 1) gameStateUI.ShowCnagedLap();
             if (!isFirstLap) isFirstLap = true;
         }
@@ -44,10 +51,14 @@ public class CheckpointManager : MonoBehaviour
                 ChangeCheckpointState(currentCheckpoint, false);
                 currentCheckpoint++;
                 ChangeCheckpointState(currentCheckpoint, true);
+
+                drawBezierCurve.DeleteLine();
+                drawBezierCurve.DrawCurve(previousCheckpoint, nextCheckpoint);
             }
             else
             {
                 ChangeCheckpointState(currentCheckpoint, false);
+                drawBezierCurve.DeleteLine();
                 gameStateUI.ShowFinalScreen();
             }
         }
@@ -56,6 +67,14 @@ public class CheckpointManager : MonoBehaviour
 
     public void ChangeCheckpointState(int pos, bool value)
     {
+        if (!value)
+        {
+            previousCheckpoint = checkpoints[pos].gameObject;
+        }
+        else
+        {
+            nextCheckpoint = checkpoints[pos].gameObject;
+        }
         checkpoints[pos].gameObject.SetActive(value);
     }
 

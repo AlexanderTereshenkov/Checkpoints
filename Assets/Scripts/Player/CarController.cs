@@ -49,5 +49,7 @@ public class CarController : MonoBehaviour
         checkpointManager.ChangeCheckpointState(checkpointManager.GetCurrentCheckpoint(), false);
         checkpointManager.SetCurrentCheckpoint(0);
         checkpointManager.ChangeCheckpointState(checkpointManager.GetCurrentCheckpoint(), true);
+        checkpointManager.GetBezierCurveDrawer().DeleteLine();
+        checkpointManager.SetIsFirstLap(false);
     }
 }

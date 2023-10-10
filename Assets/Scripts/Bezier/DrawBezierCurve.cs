@@ -13,7 +13,7 @@ public class DrawBezierCurve : MonoBehaviour
         int segments = 30;
         Vector3[] allPoints = new Vector3[segments];
         lineRenderer.positionCount = segments;
-        Vector3 previousPoint = previousCheckpoint.transform.position;
+        //Vector3 previousPoint = previousCheckpoint.transform.position;
         for (int i = 0; i < segments; i++)
         {
             float t = (float)i / segments;
@@ -21,7 +21,7 @@ public class DrawBezierCurve : MonoBehaviour
                 previousCheckpoint.transform.GetChild(0).GetChild(0).GetComponent<Checkpoint>().GetFirstBezierPoint().position,
                 nextCheckpoint.transform.GetChild(0).GetChild(0).GetComponent<Checkpoint>().GetSecondBezierPoint().position, nextCheckpoint.transform.position, t);
             allPoints[i] = point;
-            previousPoint = point;
+            //previousPoint = point;
         }
         lineRenderer.SetPositions(allPoints);
     }

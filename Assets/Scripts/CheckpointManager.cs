@@ -88,4 +88,14 @@ public class CheckpointManager : MonoBehaviour
         currentCheckpoint = value;
     }
 
+    public DrawBezierCurve GetBezierCurveDrawer()
+    {
+        return drawBezierCurve;
+    }
+
+    public void SetIsFirstLap(bool value)
+    {
+        isFirstLap = value;
+    }
+
 }

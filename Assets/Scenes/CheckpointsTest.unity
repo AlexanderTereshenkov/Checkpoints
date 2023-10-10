@@ -345,7 +345,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
@@ -398,7 +398,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -1294,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3218803485931142453, guid: 8d6becd56333ef04ab3ab43ebc1f9858, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.669642
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 3218803485931142453, guid: 8d6becd56333ef04ab3ab43ebc1f9858, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1302,7 +1302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3218803485931142453, guid: 8d6becd56333ef04ab3ab43ebc1f9858, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0371871
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 3218803485931142453, guid: 8d6becd56333ef04ab3ab43ebc1f9858, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1402,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2386780015646953147, guid: 8fb0b20d9d1b1d440a6142acf9c9cabc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.6
+      value: -6.31
       objectReference: {fileID: 0}
     - target: {fileID: 2386780015646953147, guid: 8fb0b20d9d1b1d440a6142acf9c9cabc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1438,7 +1438,7 @@ PrefabInstance:
       objectReference: {fileID: 1851122270}
     - target: {fileID: 8111111102726545011, guid: 8fb0b20d9d1b1d440a6142acf9c9cabc, type: 3}
       propertyPath: m_Name
-      value: Car
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
